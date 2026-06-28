@@ -2,6 +2,7 @@ package com.nemanjanedic.simplewallet.account;
 
 import com.nemanjanedic.simplewallet.account.dto.AccountBalanceResponse;
 import com.nemanjanedic.simplewallet.account.dto.AccountResponse;
+import com.nemanjanedic.simplewallet.account.dto.BalanceOperationRequest;
 import com.nemanjanedic.simplewallet.account.dto.CreateAccountRequest;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -32,5 +33,21 @@ public class AccountController {
     @GetMapping("/{accountId}/balance")
     public AccountBalanceResponse getBalance(@PathVariable Long accountId) {
         return accountService.getBalance(accountId);
+    }
+
+    @PostMapping("/{accountId}/deposit")
+    public AccountBalanceResponse deposit(
+            @PathVariable Long accountId,
+            @Valid @RequestBody BalanceOperationRequest request
+    ) {
+        return accountService.deposit(accountId, request);
+    }
+
+    @PostMapping("/{accountId}/withdraw")
+    public AccountBalanceResponse withdraw(
+            @PathVariable Long accountId,
+            @Valid @RequestBody BalanceOperationRequest request
+    ) {
+        return accountService.withdraw(accountId, request);
     }
 }
