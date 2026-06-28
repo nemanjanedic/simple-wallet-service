@@ -1,3 +1,7 @@
 spring:
   application:
     name: Simple Wallet
+server:
+  error:
+    include-stacktrace: never
+    include-message: always
